@@ -33,12 +33,22 @@ require("mason-lspconfig").setup()
 
 -- LSP configuration
 local lspconfig = require('lspconfig')
-
+-- function on_attach beferore use it 
+local on_attach = function(client, bufnr)
+  client.server_capabilities.signatureHelpProvider = false
+end
 -- language server config
 -- lua
 lspconfig.lua_ls.setup {}
 -- yamls
 lspconfig.yamlls.setup {}
+-- c plus plus config
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+vim.o.makeprg = "g++ -std=c++20 % -o %:r.out && ./%:r.out"
 
 vim.cmd[[colorscheme solarized-osaka]]
 -- Configuración básica de Neovim

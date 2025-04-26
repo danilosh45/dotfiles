@@ -14,7 +14,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font pango:Iosevka 10 
+font pango:Iosevka 11 
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -24,18 +24,18 @@ font pango:Iosevka 10
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id picom --experimental-backends &
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
+# Unificamos el sistema de bloqueo de pantalla a light-locker
+exec --no-startup-id light-locker &
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id xss-lock --transfer-sleep-lock -- xfce4-screensaver-command -l
+# xfce4-power-manager para gestión de energía
 exec --no-startup-id xfce4-power-manager
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
+# Wallpaper setting
+exec --no-startup-id feh --bg-fill ~/Pictures/zetsubou.jpg
+
+# NetworkManager applet
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
@@ -45,6 +45,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# Brillo de pantalla (requiere el paquete 'light')
+#bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 && $refresh_i3status
+#bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 && $refresh_i3status
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -53,17 +57,15 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec kitty 
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+# bindscode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -120,16 +122,17 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+# Define names for default workspaces
+set $ws1 "1: 🖥️" 
+set $ws2 "2: 🌐"
+set $ws3 "3: 🔍"
+set $ws4 "4: ✉️"
+set $ws5 "5: 📝"
+set $ws6 "6: 📁"
+set $ws7 "7: 🎬"
+set $ws8 "8: 🔧"
+set $ws9 "9: 💬"
+set $ws10 "10: 🎵"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -155,6 +158,18 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# define fixed workspace for each screen:
+workspace $ws1 output eDP-1
+workspace $ws2 output eDP-1
+workspace $ws3 output HDMI-2
+workspace $ws4 output HDMI-2
+workspace $ws5 output HDMI-2
+workspace $ws6 output HDMI-2
+workspace $ws7 output HDMI-2
+workspace $ws8 output HDMI-2
+workspace $ws9 output HDMI-2
+workspace $ws10 output HDMI-2
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -166,10 +181,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+        # Pressing left will shrink the window's width.
+        # Pressing right will grow the window's width.
+        # Pressing up will shrink the window's height.
+        # Pressing down will grow the window's height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
@@ -189,14 +204,68 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Sistema de gaps (requiere i3-gaps)
+gaps inner 10
+gaps outer 5
+smart_gaps on
+smart_borders on
+
+# Modo de sistema para gestión de energía
+set $mode_system Sistema: (l) bloquear, (e) salir, (s) suspender, (h) hibernar, (r) reiniciar, (Shift+s) apagar
+mode "$mode_system" {
+    bindsym l exec --no-startup-id light-locker-command -l, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"  
+    
+    # back to normal
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Delete mode "$mode_system"
+
+# Modo para gestión de monitores
+set $mode_display Pantallas: (h) configuración hogar, (p) configuración portátil
+mode "$mode_display" {
+    bindsym h exec --no-startup-id ~/.screenlayout/home_setup.sh && feh --bg-fill ~/Pictures/zetsubou.jpg, mode "default"
+    bindsym p exec --no-startup-id ~/.screenlayout/portable_setup.sh && feh --bg-fill ~/Pictures/zetsubou.jpg, mode "default"
+    
+    # back to normal
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+d mode "$mode_display"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
+    position bottom 
+    tray_output primary
+    
+    colors {
+        background #2f343f
+        statusline #ffffff
+        separator #666666
+        
+        # clase               borde    fondo    texto
+        focused_workspace     #4c7899  #285577  #ffffff
+        active_workspace      #333333  #5f676a  #ffffff
+        inactive_workspace    #333333  #222222  #888888
+        urgent_workspace      #2f343a  #900000  #ffffff
+    }
 }
 
-
-bindsym $mod+Shift+h exec "~/.screenlayout/home_setup.sh" 
-bindsym $mod+Shift+p exec "~/.screenlayout/portable_setup.sh"
+# Atajos antiguos (mantenidos para compatibilidad pero se recomiendan los modos nuevos)
+bindsym $mod+Shift+h exec "~/.screenlayout/home_setup.sh && feh --bg-fill ~/Pictures/zetsubou.jpg"
+bindsym $mod+Shift+p exec "~/.screenlayout/portable_setup.sh && feh --bg-fill ~/Pictures/zetsubou.jpg"
 bindsym $mod+Shift+s exec "systemctl suspend"
 bindsym $mod+Shift+b exec "light-locker-command -l"
+
+# Reglas para aplicaciones específicas (ejemplos)
+# for_window [class="Pavucontrol"] floating enable
+# for_window [class="Nitrogen"] floating enable sticky enable
+# for_window [class="Lxappearance"] floating enable sticky enable
+# for_window [class="Spotify"] move to workspace $ws10
