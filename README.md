@@ -8,10 +8,10 @@ The repository is organized to reflect the directory structure in `$HOME` and co
 
 ```
 dotfiles/
-├── fish/                # Configuration for the Fish shell
-├── i3/                  # Configuration for i3 Window Manager
-├── i3status/            # Configuration for i3status
-├── kitty/               # Configuration for the Kitty terminal
+├── zsh/                 # Configuration for the zsh shell
+├── hypr/                # Configuration for hyprland Window Manager
+├── waybar/            # Configuration for waybar 
+├── ghostty/               # Configuration for the ghostty terminal
 ├── nvim/                # Configuration for Neovim
 └── ...                  # Other configuration directories
 ```
@@ -63,11 +63,11 @@ If you need to make machine-specific adjustments, you can edit the files directl
 
 This repository contains configurations for the following tools:
 
-- **[i3](https://i3wm.org/):** A tiling and floating window manager.
-- **[i3status](https://i3wm.org/i3status/):** A lightweight status bar for i3.
+- **[hyprland](https://hyprland.org/):** A tiling and floating window manager.
+- **[waybar](https://github.com/Alexays/waybar):** A lightweight status bar 
 - **[Kitty](https://sw.kovidgoyal.net/kitty/):** A fast and customizable terminal emulator.
 - **[Neovim](https://neovim.io/):** A modern text editor for developers.
-- **[Fish Shell](https://fishshell.com/):** A friendly and powerful interactive shell.
+- **[zsh](https://zsh.org/):** A friendly and powerful interactive shell.
 
 ## 📌 License
 
