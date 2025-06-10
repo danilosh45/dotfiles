@@ -1,0 +1,136 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    
+    "logo": {
+        "source": "~/.config/fastfetch/logos/cat.txt",
+        "padding": {
+            "top": 1,
+            "right": 3
+        }
+    },
+
+    "display": {
+        "separator": " •  "
+    },
+
+    "modules": [
+        "break",
+        "break",
+        {
+            "type": "title",
+            "color": {
+                "user": "#33cc99",   // verde neón
+                "at":   "#999999",   // gris
+                "host": "#ffffff"    // blanco
+            }
+        },
+        "break",
+        {
+            "type": "os",
+            "key": "distribution   ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "bios",
+            "key": "Bios           ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "board",
+            "key": "Board          ",
+            "keyColor": "#cc99cc"
+        },
+
+        {
+            "type": "chassis",
+            "key": "Chassis        ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "kernel",
+            "key": "linux kernel   ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "packages",
+            "format": "{} (pacman)",
+            "key": "packages       ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "shell",
+            "key": "unix shell     ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "display",
+            "key": "display        ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "terminal",
+            "key": "terminal       ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "gpu",
+            "key": "GPU driver     ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "memory",
+            "key": "Memory         ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "swap",
+            "key": "Swap           ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "uptime",
+            "key": "Uptime         ",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "disk",
+            "key": "OS Age         ",
+	    "folders": "/",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "battery",
+            "key": "Battery        ",
+	    "folders": "/",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "wifi",
+            "key": "Wifi           ",
+	    "folders": "/",
+            "keyColor": "#cc99cc"
+        },
+        {
+            "type": "wm",
+            "format": "{} ({3})",
+            "key": "window manager ",
+            "keyColor": "#cc99cc"
+        },
+        "break",
+        {
+            "type": "colors",
+            "symbol": "block",
+            "colors": [
+                "#cc99cc",  // lila
+                "#9966cc",  // púrpura
+                "#33cc99",  // verde neón
+                "#ffffff",  // blanco
+                "#999999",  // gris
+                "#ff6699"   // rosa
+            ]
+        },
+        "break",
+        "break"
+    ]
+}
+
