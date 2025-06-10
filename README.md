@@ -49,9 +49,9 @@ Navigate to the repository directory and use Stow to create symbolic links for t
 ```bash
 cd ~/dotfiles
 stow nvim
-stow i3
-stow kitty
-stow fish
+stow hypr
+stow ghostty
+stow zsh
 ```
 
 Each command creates the corresponding symbolic links in the appropriate directories, such as `~/.config/nvim`, `~/.config/i3`, etc.
