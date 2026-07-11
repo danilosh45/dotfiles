@@ -40,8 +40,6 @@ background-blur = false
 shell-integration-features = no-cursor,no-sudo,no-title
 gtk-titlebar = false
 
-theme = rose-pine-moon
-
 #
 # # Empty values are used to reset config keys to default.
 # key =
