@@ -1,0 +1,14 @@
+[remmina]
+name=PC Bestia
+protocol=RDP
+server=192.168.1.20:3389  # <-- PON LA IP DE TU PC BESTIA
+username=dash
+password=modobiju13
+domain=
+colordepth=32
+network=lan
+quality=0
+viewmode=1
+scale=1
+keyboard_map=us
+disableautoreconnect=0
