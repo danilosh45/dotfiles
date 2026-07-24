@@ -43,3 +43,6 @@ hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("pamixer -t && notify-send -t 8
 
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl s +5% && notify-send -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d %) -t 800 'Brillo'"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%- && notify-send -h int:value:$(brightnessctl -m | cut -d, -f4 | tr -d %) -t 800 'Brillo'"), { locked = true, repeating = true })
+
+-- Bluetooth manager
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("blueman-manager"))
