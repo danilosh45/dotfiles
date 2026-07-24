@@ -5,7 +5,7 @@
     "spacing": 4,
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": ["network", "pulseaudio", "battery", "tray"],
+    "modules-right": ["network","bluetooth", "pulseaudio", "battery", "tray"],
     
     "hyprland/workspaces": {
         "format": "{name}",
@@ -31,6 +31,17 @@
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\\n{ipaddr}/{cidr}",
         "tooltip-format-ethernet": "{ipaddr}/{cidr}",
         "on-click": "nm-connection-editor"
+    },
+
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {num_connections}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias} ({device_battery_percentage}%)",
+        "on-click": "blueman-manager"
     },
     
     "pulseaudio": {
