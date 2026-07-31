@@ -1,0 +1,141 @@
+@define-color bg #1e1e2e;
+@define-color bg-secondary #313244;
+@define-color fg #cdd6f4;
+@define-color blue #89b4fa;
+@define-color green #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color red #f38ba8;
+@define-color mauve #cba6f7;
+
+* {
+    font-family: "Hack Nerd Font", sans-serif;
+    font-size: 13px;
+}
+
+.notification {
+    background: @bg;
+    border: 1px solid @bg-secondary;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 6px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.notification:hover {
+    border-color: @blue;
+}
+
+.notification .summary {
+    color: @fg;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.notification .body {
+    color: #a6adc8;
+    font-size: 12px;
+}
+
+.notification image {
+    margin-right: 12px;
+    border-radius: 8px;
+}
+
+.notification progress {
+    background: @bg-secondary;
+    border-radius: 6px;
+    min-height: 8px;
+    margin-top: 8px;
+}
+
+.notification progress trough {
+    background: @bg-secondary;
+    border-radius: 6px;
+    min-height: 8px;
+}
+
+.notification progress progress {
+    background: linear-gradient(90deg, @blue, @mauve);
+    border-radius: 6px;
+    min-height: 8px;
+}
+
+.control-center {
+    background: rgba(30, 30, 46, 0.95);
+    border: 1px solid @bg-secondary;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.control-center .widget-title {
+    color: @fg;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.control-center .widget-title button {
+    background: @bg-secondary;
+    color: @fg;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+.control-center .widget-title button:hover {
+    background: @red;
+    color: @bg;
+}
+
+.control-center .widget-dnd {
+    background: @bg-secondary;
+    border-radius: 12px;
+    padding: 8px 12px;
+    color: @fg;
+}
+
+.control-center .widget-dnd switch {
+    background: @bg-secondary;
+    border-radius: 12px;
+}
+
+.control-center .widget-dnd switch:checked {
+    background: @green;
+}
+
+.control-center .notification {
+    background: @bg-secondary;
+    border-color: #45475a;
+}
+
+.control-center .notification:hover {
+    border-color: @blue;
+}
+
+.notification .close-button {
+    background: transparent;
+    color: #6c7086;
+    border-radius: 50%;
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.notification .close-button:hover {
+    background: @red;
+    color: @bg;
+}
+
+.notification-group {
+    background: transparent;
+}
+
+.notification-group-header {
+    color: @blue;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 8px;
+    padding: 4px 8px;
+    background: @bg-secondary;
+    border-radius: 8px;
+}
