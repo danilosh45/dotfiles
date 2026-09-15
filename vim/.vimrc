@@ -16,6 +16,22 @@ set hlsearch
 set ignorecase
 set smartcase
 
+" --- Apariencia ---
+" Tema azul de stock (alternativa: darkblue)
+colorscheme blue
+
+" Cursor: bloque en normal/visual, barra fina en insert, subrayado en replace
+" (secuencias DECSCUSR, funcionan en GNOME Terminal/VTE, xterm, etc.)
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+let &t_SR = "\e[4 q"
+
+" Al salir, devolver el cursor por defecto a la terminal
+augroup reset_cursor_shape
+  autocmd!
+  autocmd VimLeave * silent !printf '\e[0 q'
+augroup END
+
 " --- Keybindings ---
 
 " Guardar con Ctrl+Enter (puede no llegar en terminal; funciona en gvim)
