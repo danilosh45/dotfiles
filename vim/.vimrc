@@ -16,6 +16,11 @@ set hlsearch
 set ignorecase
 set smartcase
 
+" Esc instantáneo al salir de insert: timeout corto para secuencias de escape,
+" sin afectar el tiempo para completar mappings (teclas como sf, te, etc.)
+set timeoutlen=1000
+set ttimeoutlen=10
+
 " --- Apariencia ---
 " Tema azul de stock (alternativa: darkblue)
 colorscheme blue
