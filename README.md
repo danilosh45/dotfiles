@@ -14,7 +14,6 @@ The repository is organized to reflect the directory structure in `$HOME`:
 dotfiles/
 ├── zsh/                 # zsh + oh-my-zsh configuration (~/.zshrc)
 ├── vim/                 # Minimal vim configuration (~/.vimrc)
-├── nvim/                # Neovim configuration (legacy, kept for reference)
 └── ...                  # Other configuration directories
 ```
 
@@ -52,7 +51,6 @@ Navigate to the repository directory and use Stow to create symbolic links for t
 cd ~/dotfiles
 stow zsh
 stow vim
-stow nvim  # optional
 ```
 
 Each command creates the corresponding symbolic links in the appropriate directories, such as `~/.zshrc` or `~/.vimrc`.
@@ -93,7 +91,6 @@ This repository contains configurations for the following tools:
 
 - **[zsh](https://zsh.org/):** A friendly and powerful interactive shell, with [oh-my-zsh](https://ohmyz.sh/).
 - **[Vim](https://www.vim.org/):** Minimal, plugin-free setup with my custom keybindings — the core of my infra workflow.
-- **[Neovim](https://neovim.io/):** Legacy configuration, kept for reference.
 
 ## 📌 License
 
