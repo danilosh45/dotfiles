@@ -23,7 +23,7 @@ set ttimeoutlen=10
 
 " --- Apariencia ---
 " Tema azul de stock (alternativa: darkblue)
-colorscheme blue
+colorscheme darkblue
 
 " Cursor: bloque en normal/visual, barra fina en insert, subrayado en replace
 " (secuencias DECSCUSR, funcionan en GNOME Terminal/VTE, xterm, etc.)
