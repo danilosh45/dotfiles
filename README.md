@@ -2,17 +2,19 @@
 
 Welcome to my dotfiles! This repository contains all my custom configurations for the tools and environments I use daily. I use [GNU Stow](https://www.gnu.org/software/stow/) to efficiently manage my configurations and keep them synchronized across devices.
 
+My current workflow: **GNOME** (stock, keyboard-driven) + **GNOME Terminal** with **zsh** (oh-my-zsh) as my shell and **vim** as my core editor for infrastructure work (IaC, config files, plain text). For heavy coding I use an IDE with vim mode.
+
+> 🗃️ The old Hyprland/Wayland stack (hyprland, waybar, wofi, swaync, ghostty, fastfetch, remmina) is archived in the [`hyprland-legacy`](https://github.com/danilosh45/dotfiles/tree/hyprland-legacy) branch.
+
 ## 🖂️ Repository Structure
 
-The repository is organized to reflect the directory structure in `$HOME` and contains configurations for various tools. Here's an overview:
+The repository is organized to reflect the directory structure in `$HOME`:
 
 ```
 dotfiles/
-├── zsh/                 # Configuration for the zsh shell
-├── hypr/                # Configuration for hyprland Window Manager
-├── waybar/            # Configuration for waybar 
-├── ghostty/               # Configuration for the ghostty terminal
-├── nvim/                # Configuration for Neovim
+├── zsh/                 # zsh + oh-my-zsh configuration (~/.zshrc)
+├── vim/                 # Minimal vim configuration (~/.vimrc)
+├── nvim/                # Neovim configuration (legacy, kept for reference)
 └── ...                  # Other configuration directories
 ```
 
@@ -48,26 +50,50 @@ Navigate to the repository directory and use Stow to create symbolic links for t
 
 ```bash
 cd ~/dotfiles
-stow nvim
-stow hypr
-stow ghostty
 stow zsh
+stow vim
+stow nvim  # optional
 ```
 
-Each command creates the corresponding symbolic links in the appropriate directories, such as `~/.config/nvim`, `~/.config/i3`, etc.
+Each command creates the corresponding symbolic links in the appropriate directories, such as `~/.zshrc` or `~/.vimrc`.
 
-### 4. Customize if Necessary
+### 4. Set up zsh + oh-my-zsh
+
+Install zsh and oh-my-zsh:
+
+```bash
+# Arch Linux
+sudo pacman -S zsh
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+Install the external plugins used in `.zshrc`:
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+Make zsh your default shell:
+
+```bash
+chsh -s $(which zsh)
+```
+
+### 5. Customize if Necessary
 If you need to make machine-specific adjustments, you can edit the files directly. Don't forget to commit your changes if you want to keep them synchronized later!
 
 ## 🛠️ Included Tools
 
 This repository contains configurations for the following tools:
 
-- **[hyprland](https://hyprland.org/):** A tiling and floating window manager.
-- **[waybar](https://github.com/Alexays/waybar):** A lightweight status bar 
-- **[Kitty](https://sw.kovidgoyal.net/kitty/):** A fast and customizable terminal emulator.
-- **[Neovim](https://neovim.io/):** A modern text editor for developers.
-- **[zsh](https://zsh.org/):** A friendly and powerful interactive shell.
+- **[zsh](https://zsh.org/):** A friendly and powerful interactive shell, with [oh-my-zsh](https://ohmyz.sh/).
+- **[Vim](https://www.vim.org/):** Minimal, plugin-free setup with my custom keybindings — the core of my infra workflow.
+- **[Neovim](https://neovim.io/):** Legacy configuration, kept for reference.
 
 ## 📌 License
 
@@ -80,4 +106,3 @@ This project is licensed under the [MIT](LICENSE), which means you can freely us
 This repository is inspired by best practices for managing dotfiles, including the use of GNU Stow for symbolic links. Check out this [blog](https://medium.com/quick-programming/managing-dotfiles-with-gnu-stow-9b04c155ebad) for more information.
 
 Thank you for visiting my dotfiles! If you have suggestions or questions, feel free to open an [issue](https://github.com/danilosh45/dotfiles/issues) or contact me. 🚀
-
