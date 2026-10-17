@@ -14,6 +14,9 @@ The repository is organized to reflect the directory structure in `$HOME`:
 dotfiles/
 ├── zsh/                 # zsh + oh-my-zsh configuration (~/.zshrc)
 ├── vim/                 # Minimal vim configuration (~/.vimrc)
+├── gnome/               # GNOME + flameshot + dconf keybindings (~/.config, ~/.local/bin)
+├── fonts/               # Fuentes (Hack) en ~/.local/share/fonts
+├── scripts/             # Scripts de bootstrap (no stow-managed)
 └── ...                  # Other configuration directories
 ```
 

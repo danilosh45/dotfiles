@@ -1,0 +1,34 @@
+# ~/dotfiles/gnome/dconf/gnome.dconf
+# Snapshot de las claves GNOME gestionadas por dotfiles.
+# Aplicar con:
+#   dconf load / < ~/dotfiles/gnome/dconf/gnome.dconf
+# (el script bootstrap.sh se encarga).
+
+[org/gnome/shell/keybindings]
+# Dejamos Print como nativo de GNOME (screenshot del shell) y anulamos
+# los demás nativos que chocaban con flameshot.
+screenshot=['Print']
+screenshot-window=['<Alt>Print']
+show-screenshot-ui=['']
+show-screen-recording-ui=['<Ctrl><Shift><Alt>R']
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
+
+# custom0 -> terminal
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+name='terminal'
+command='gnome-terminal --working-directory=$HOME'
+binding='<Super>Return'
+
+# custom1 -> gnome screenshot (Print alternativo, sin flameshot)
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+name='Area Screenshot (flameshot)'
+command='/home/dan/.local/bin/flameshot-screenshot.sh'
+binding='<Shift><Super>s'
+
+# custom2 -> grabar pantalla (si lo necesitas después)
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+name='Screen Record (gnome)'
+command='gnome-screenshot --interactive'
+binding='<Super>r'
