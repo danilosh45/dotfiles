@@ -14,6 +14,7 @@ The repository is organized to reflect the directory structure in `$HOME`:
 dotfiles/
 ├── zsh/                 # zsh + oh-my-zsh configuration (~/.zshrc)
 ├── vim/                 # Minimal vim configuration (~/.vimrc)
+├── nvim/                # Neovim + Solarized + lualine + Codex split
 ├── gnome/               # GNOME + flameshot + dconf keybindings (~/.config, ~/.local/bin)
 ├── fonts/               # Fuentes (Hack) en ~/.local/share/fonts
 ├── scripts/             # Scripts de bootstrap (no stow-managed)
@@ -58,7 +59,49 @@ stow vim
 
 Each command creates the corresponding symbolic links in the appropriate directories, such as `~/.zshrc` or `~/.vimrc`.
 
-### 4. Set up zsh + oh-my-zsh
+### 4. Neovim and Codex on WSL
+
+These dotfiles expect Neovim `>= 0.10`. In an Ubuntu/Debian WSL terminal:
+
+```bash
+sudo apt update
+sudo apt install -y git curl stow ripgrep build-essential zsh neovim
+
+nvim --version       # verify that the version is >= 0.10
+```
+
+If the Ubuntu/Debian package is older than 0.10, install a newer Neovim
+package/AppImage before continuing.
+
+Install the Codex CLI if it is not already available. The command below uses
+the official npm package:
+
+```bash
+sudo apt install -y nodejs npm
+sudo npm install -g @openai/codex@latest
+codex --version
+```
+
+Apply the Neovim module and install its plugins and LSP servers:
+
+```bash
+cd ~/dotfiles
+stow --restow --target="$HOME" nvim
+bash scripts/bootstrap-nvim.sh
+```
+
+The bootstrap installs Solarized, lualine, Telescope, Treesitter, Mason and
+the configured LSP servers. Inside Neovim:
+
+- `<Space>ac` opens Codex in a bottom split in the current project.
+- `:Codex` does the same.
+- `:Lazy` manages Neovim plugins.
+- `:Mason` manages LSP servers.
+
+Codex must be authenticated separately according to your organization's
+policy; credentials are not stored in this repository.
+
+### 5. Set up zsh + oh-my-zsh
 
 Install zsh and oh-my-zsh:
 
@@ -85,7 +128,7 @@ Make zsh your default shell:
 chsh -s $(which zsh)
 ```
 
-### 5. Customize if Necessary
+### 6. Customize if Necessary
 If you need to make machine-specific adjustments, you can edit the files directly. Don't forget to commit your changes if you want to keep them synchronized later!
 
 ## 🛠️ Included Tools
@@ -94,6 +137,7 @@ This repository contains configurations for the following tools:
 
 - **[zsh](https://zsh.org/):** A friendly and powerful interactive shell, with [oh-my-zsh](https://ohmyz.sh/).
 - **[Vim](https://www.vim.org/):** Minimal, plugin-free setup with my custom keybindings — the core of my infra workflow.
+- **[Neovim](https://neovim.io/):** Modular setup with Solarized, lualine, LSPs, Treesitter and a Codex terminal split.
 
 ## 📌 License
 
