@@ -28,7 +28,7 @@ nvim/.config/nvim/
 │   ├── config/
 │   │   ├── options.lua      # opciones Vim/Neovim (portadas desde .vimrc)
 │   │   ├── keymaps.lua      # <leader> = Space; prefijo s* preservado
-│   │   ├── agents.lua       # Codex en split inferior
+│   │   ├── agents.lua       # Codex y Claude Code en split inferior
 │   │   └── autocmds.lua     # cursor shape, ftplugins
 │   └── plugins/
 │       ├── colorscheme.lua  # Solarized oficial
@@ -53,12 +53,20 @@ nvim                                  # abre y deja que Mason instale los LSPs
 : Mason                               # (dentro de nvim) pulsar 'U' para todos
 ```
 
-`codex` debe estar instalado y disponible en `PATH`. Dentro de Neovim puedes
-abrirlo con `<Space>ac` o con `:Codex`; se inicia en un split inferior de 15
-líneas usando el directorio de trabajo actual.
-
 Tras eso, `nvim archivo.yml` abre con LSP yaml + treesitter + guardado
 automático con conformación.
+
+## Solarized y agentes
+
+En Windows Terminal (incluido WSL), Neovim detecta `WT_SESSION` o
+`WT_PROFILE_ID` y usa la aproximación Solarized Dark de 256 colores, que es
+independiente de la paleta ANSI del perfil. GNOME Terminal sigue usando la
+paleta Solarized de 16 colores configurada en su perfil.
+
+`:Codex` y `:ClaudeCode` abren un split inferior de 15 líneas en el
+directorio de trabajo actual. Instala `codex` y `claude` según los agentes
+que uses y asegúrate de que sus ejecutables estén en el `PATH` de Neovim.
+En WSL, usa el `PATH` de tu distribución Linux.
 
 ## Atajos principales
 
@@ -89,6 +97,7 @@ automático con conformación.
 | `<leader>e` | toggle neo-tree (explorador de archivos)   |
 | `<leader>gg` | abrir lazygit en split (si está instalado) |
 | `<leader>ac` | abrir Codex en split inferior                  |
+| `<leader>aa` | abrir Claude Code en split inferior            |
 | `<C-s>` | guardar (compatible en modos normal e insert)   |
 
 ### Movimientos extra (sin prefijos ajenos)

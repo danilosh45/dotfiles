@@ -9,12 +9,11 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      -- El tema oficial usa la paleta del terminal cuando Neovim se ejecuta
-      -- dentro de una terminal. GNOME Terminal ya tiene configurados los 16
-      -- colores base de Solarized, así que usamos ese modo.
-      vim.g.solarized_termcolors = 16
-      -- Solarized oficial define grupos cterm (no una paleta GUI completa).
-      -- Así Neovim usa los colores del perfil de GNOME Terminal.
+      -- En Windows Terminal, usa la aproximación Solarized de 256 colores.
+      -- GNOME Terminal ya tiene configurada la paleta ANSI de Solarized.
+      local windows_terminal = (vim.env.WT_SESSION or "") ~= ""
+        or (vim.env.WT_PROFILE_ID or "") ~= ""
+      vim.g.solarized_termcolors = windows_terminal and 256 or 16
       vim.opt.termguicolors = false
       vim.o.background = "dark"
       vim.cmd.colorscheme("solarized")
