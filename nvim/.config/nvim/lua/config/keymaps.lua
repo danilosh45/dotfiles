@@ -5,6 +5,24 @@
 local map = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
+-- Devuelve la raíz del proyecto Git del buffer actual. Si el archivo aún no
+-- pertenece a un repositorio, usa el directorio del archivo como fallback.
+local function project_root()
+  local filename = vim.api.nvim_buf_get_name(0)
+  local start = filename ~= ""
+    and vim.fs.dirname(filename)
+    or (vim.uv or vim.loop).cwd()
+  local git_dir = vim.fs.find(".git", { path = start, upward = true })[1]
+  return git_dir and vim.fs.dirname(git_dir) or start
+end
+
+local function telescope_call(method, opts_override)
+  local ok, builtin = pcall(require, "telescope.builtin")
+  if not ok then return false end
+  builtin[method](opts_override or {})
+  return true
+end
+
 -- Leader: Space (compatible con tu uso de <Space> como <C-w>w)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -21,10 +39,14 @@ map({ "n", "i", "v" }, "<C-s>", "<Cmd>w<CR>", opts)
 -- Telescope, que es la versión moderna y mucho más potente. Si por algún
 -- motivo Telescope no carga aún, caemos a netrw.
 map("n", "sf", function()
-  local ok, _ = pcall(require, "telescope.builtin")
-  if ok then
-    require("telescope.builtin").find_files()
-  else
+  if not telescope_call("find_files", { cwd = project_root() }) then
+    vim.cmd("Explore")
+  end
+end, opts)
+
+-- `sF` mantiene una búsqueda amplia desde el directorio global de Neovim.
+map("n", "sF", function()
+  if not telescope_call("find_files", { cwd = (vim.uv or vim.loop).cwd() }) then
     vim.cmd("Explore")
   end
 end, opts)
@@ -51,10 +73,14 @@ map("n", "-", "<C-x>", opts)
 
 -- `sg`  → grep en proyecto (Telescope live_grep)
 map("n", "sg", function()
-  local ok, _ = pcall(require, "telescope.builtin")
-  if ok then
-    require("telescope.builtin").live_grep()
-  else
+  if not telescope_call("live_grep", { cwd = project_root() }) then
+    vim.cmd("vimgrep /")
+  end
+end, opts)
+
+-- `sG` hace grep amplio desde el directorio global de Neovim.
+map("n", "sG", function()
+  if not telescope_call("live_grep", { cwd = (vim.uv or vim.loop).cwd() }) then
     vim.cmd("vimgrep /")
   end
 end, opts)

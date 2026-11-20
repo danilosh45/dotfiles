@@ -66,7 +66,8 @@ automático con conformación.
 
 | Keymap | Acción                                  |
 |--------|-----------------------------------------|
-| `sf`   | File finder (Telescope; antes era `:Explore`) |
+| `sf`   | File finder en la raíz Git del proyecto       |
+| `sF`   | File finder amplio desde el cwd de Neovim     |
 | `ss`   | Split horizontal                        |
 | `sv`   | Split vertical                          |
 | `sh/sj/sk/sl` | Mover foco entre splits         |
@@ -79,7 +80,8 @@ automático con conformación.
 
 | Keymap | Acción                                          |
 |--------|-------------------------------------------------|
-| `sg`   | grep en el proyecto (Telescope live grep)       |
+| `sg`   | grep en la raíz Git del proyecto                |
+| `sG`   | grep amplio desde el cwd de Neovim              |
 | `sb`   | buffers abiertos                                |
 | `s?`   | ayuda de keybindings (WhichKey)                 |
 | `sr`   | rename del símbolo bajo el cursor (LSP)         |
