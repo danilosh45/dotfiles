@@ -1,0 +1,39 @@
+customCommands:
+  - key: '<ctrl+v>'
+    context: 'files'
+    description: 'Crear Conventional Commit con los cambios preparados'
+    prompts:
+      - type: 'menu'
+        key: 'Type'
+        title: 'Tipo de cambio'
+        options:
+          - { value: 'feat', description: 'Funcionalidad nueva' }
+          - { value: 'fix', description: 'Corrección de un fallo' }
+          - { value: 'docs', description: 'Documentación' }
+          - { value: 'refactor', description: 'Reorganización sin cambiar el comportamiento' }
+          - { value: 'test', description: 'Pruebas' }
+          - { value: 'perf', description: 'Rendimiento' }
+          - { value: 'build', description: 'Compilación o dependencias' }
+          - { value: 'ci', description: 'Integración continua' }
+          - { value: 'style', description: 'Formato del código' }
+          - { value: 'chore', description: 'Mantenimiento' }
+      - type: 'input'
+        key: 'Scope'
+        title: 'Ámbito opcional, por ejemplo nvim'
+      - type: 'input'
+        key: 'Subject'
+        title: 'Resume qué cambia en una frase'
+      - type: 'input'
+        key: 'Body'
+        title: 'Explica por qué, si hace falta'
+      - type: 'confirm'
+        title: 'Crear commit'
+        body: '{{ .Form.Type }}{{ if .Form.Scope }}({{ .Form.Scope }}){{ end }}: {{ .Form.Subject }}'
+    command: >-
+      subject={{ .Form.Subject | quote }};
+      if ! printf '%s' "$subject" | grep -q '[^[:space:]]'; then
+        printf '%s\n' 'Escribe un resumen para el commit.' >&2; exit 1;
+      fi;
+      git diff --cached --check && git commit
+      -m {{ if .Form.Scope }}{{ printf "%s(%s): %s" .Form.Type .Form.Scope .Form.Subject | quote }}{{ else }}{{ printf "%s: %s" .Form.Type .Form.Subject | quote }}{{ end }}
+      {{ if .Form.Body }}-m {{ .Form.Body | quote }}{{ end }}

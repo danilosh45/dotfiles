@@ -1,10 +1,7 @@
 -- ~/.config/nvim/lua/config/treesitter.lua
 -- Treesitter: descarga parsers en el primer arranque y activa highlight.
 --
--- En Neovim 0.10 NO existe `:TSInstall` de serie (se añadió en 0.11).
--- Usamos el plugin `nvim-treesitter` (pin v0.9.3) **SOLO** para su comando
--- `:TSInstallSync`. NO usamos su API de highlight/indent moderna: vamos
--- con el highlight nativo de Neovim 0.10 que ya tiene queries integradas.
+-- En Neovim 0.10/0.11 se conserva el instalador de la rama master.
 
 local parsers = {
   "yaml",
@@ -19,6 +16,28 @@ local parsers = {
   "html",
   "css",
 }
+
+if vim.fn.has("nvim-0.12") == 1 then
+  vim.api.nvim_create_autocmd("FileType", {
+    callback = function(event)
+      local lang = vim.treesitter.language.get_lang(event.match)
+      if vim.tbl_contains(parsers, lang) and vim.treesitter.language.add(lang) then
+        vim.treesitter.start(event.buf, lang)
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("VimEnter", {
+    once = true,
+    callback = function()
+      local ok, treesitter = pcall(require, "nvim-treesitter")
+      if ok and vim.fn.executable("tree-sitter") == 1 and vim.fn.executable("cc") == 1 then
+        treesitter.install(parsers)
+      end
+    end,
+  })
+  return
+end
 
 -- Mapa de nombre Neovim → nombre para `:TSInstall` (algunos difieren).
 local parser_aliases = {

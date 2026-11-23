@@ -18,6 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- 2) Config base (portada desde .vimrc; ligera) ------------------------------
 require("config.options")
 require("config.keymaps")
+require("config.git")
 require("config.agents")
 require("config.autocmds")
 require("config.treesitter")  -- activación TS nativo (descarga parsers si faltan)
@@ -29,6 +30,7 @@ require("lazy").setup("plugins", {
   change_detection = { enabled = false },  -- no escanea el filesystem (rápido)
   install      = { missing = false },     -- no instalar de inicio, solo bajo demanda
   checker      = { enabled = false },     -- sin avisos de actualización en cada save
+  rocks        = { enabled = false },     -- ningún plugin actual usa LuaRocks
   performance  = {
     rtp = {
       disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin" },
