@@ -17,8 +17,13 @@ return {
     },
     opts = {
       completion = {
+        -- En blink.cmp v1.4.1 `completeopt` ya no es una opción válida.
+        -- Estas opciones conservan el comportamiento no-insert/no-select.
         list = {
-          selection = { preselect = false, auto_insert = false },
+          selection = {
+            preselect = false,
+            auto_insert = false,
+          },
         },
       },
       -- Preset por defecto: `<Up>`/`<Down>`/`<C-n>`/`<C-p>` para navegar,
