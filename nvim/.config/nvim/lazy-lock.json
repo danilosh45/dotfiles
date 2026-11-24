@@ -8,11 +8,12 @@
   "neo-tree.nvim": { "branch": "main", "commit": "760d9701953ad2b0277fe9776ba99bb011ecac2b" },
   "nui.nvim": { "branch": "main", "commit": "10fc361835c856ba4233ef5ea135b919bf3dce97" },
   "nvim-lspconfig": { "branch": "master", "commit": "cb33dea610b7eff240985be9f6fe219920e630ef" },
-  "nvim-treesitter": { "branch": "main", "commit": "cfc6f2c117aaaa82f19bcce44deec2c194d900ab" },
+  "nvim-treesitter": { "branch": "main", "commit": "b706d642dd20d0922e7e92365dc73617f0fdb4ea" },
+  "nvim-treesitter-legacy": { "branch": "master", "commit": "cfc6f2c117aaaa82f19bcce44deec2c194d900ab" },
   "nvim-web-devicons": { "branch": "master", "commit": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
+  "solarized.nvim": { "branch": "main", "commit": "a8085e29883ddcfb39bd46197eb32ef00df05368" },
   "telescope.nvim": { "branch": "master", "commit": "5255aa27c422de944791318024167ad5d40aad20" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
-  "vim-colors-solarized": { "branch": "master", "commit": "528a59f26d12278698bb946f8fb82a63711eec21" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }

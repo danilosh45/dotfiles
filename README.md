@@ -15,6 +15,7 @@ dotfiles/
 ├── zsh/                 # zsh + oh-my-zsh configuration (~/.zshrc)
 ├── vim/                 # Minimal vim configuration (~/.vimrc)
 ├── nvim/                # Neovim + Solarized + lualine + Codex split
+├── yazi/                # Yazi terminal file manager with Neovim as editor
 ├── gnome/               # GNOME + flameshot + dconf keybindings (~/.config, ~/.local/bin)
 ├── fonts/               # Fuentes (Hack) en ~/.local/share/fonts
 ├── scripts/             # Scripts de bootstrap (no stow-managed)
@@ -100,6 +101,20 @@ the configured LSP servers. Inside Neovim:
 
 Codex must be authenticated separately according to your organization's
 policy; credentials are not stored in this repository.
+
+### Yazi
+
+Install [Yazi](https://yazi-rs.github.io/docs/installation/) and make sure
+`nvim` is on your PATH. Link the configuration and launch Yazi:
+
+```bash
+cd ~/dotfiles
+stow --target="$HOME" yazi
+yazi
+```
+
+Yazi opens text files in Neovim and returns to the file browser when you quit
+the editor.
 
 ### 5. Set up zsh + oh-my-zsh
 

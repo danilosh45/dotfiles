@@ -98,7 +98,15 @@ local function build_settings(short_name)
       },
     }
   end
-  return { on_attach = lsp_on_attach, autostart = true }
+  local settings = { on_attach = lsp_on_attach, autostart = true }
+  if short_name == "bashls" and vim.env.WSL_DISTRO_NAME then
+    -- Bash LS busca herramientas auxiliares en PATH al arrancar.
+    local linux_paths = vim.tbl_filter(function(path)
+      return not (path:match("^/mnt/%a/") or path:match("^/mnt/%a$"))
+    end, vim.split(vim.env.PATH or "", ":", { plain = true }))
+    settings.cmd_env = { PATH = table.concat(linux_paths, ":") }
+  end
+  return settings
 end
 
 -- Handlers globales (signs).

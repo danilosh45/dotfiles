@@ -125,15 +125,44 @@ end, { silent = true })
 -- `<leader>e`  → toggle neo-tree (explorador moderno de archivos)
 map("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { silent = true })
 
--- `<leader>gg` → lazygit (si está instalado). No fuerza: si no existe,
--- no hace nada (`:silent which lazygit || echo '[lazygit no instalado]'`).
-map("n", "<leader>gg", function()
-  if vim.fn.executable("lazygit") == 1 then
-    vim.cmd("split | terminal lazygit")
-  else
-    vim.notify("[lazygit no instalado — `apt install lazygit` o descarga de github.com/jesseduffield/lazygit]", vim.log.levels.WARN)
+local function copy_git_reference()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == "" or vim.bo.buftype ~= "" then
+    vim.notify("Abre un archivo del repositorio para copiar su referencia", vim.log.levels.WARN)
+    return
   end
-end, { silent = true })
+
+  file = vim.fs.normalize(vim.fn.resolve(file))
+  local root = vim.fn.systemlist({ "git", "-C", vim.fs.dirname(file), "rev-parse", "--show-toplevel" })[1]
+  if vim.v.shell_error ~= 0 or not root then
+    vim.notify("El archivo no está en un repositorio Git", vim.log.levels.WARN)
+    return
+  end
+
+  local prefix = vim.fs.normalize(vim.fn.resolve(root)):gsub("/$", "") .. "/"
+  if file:sub(1, #prefix) ~= prefix then
+    vim.notify("No se pudo obtener una ruta relativa al repositorio", vim.log.levels.WARN)
+    return
+  end
+
+  local line = vim.api.nvim_win_get_cursor(0)[1]
+  local first, last = line, line
+  if vim.fn.mode():match("^[vV\22]") then
+    local anchor = vim.fn.line("v")
+    first, last = math.min(line, anchor), math.max(line, anchor)
+  end
+
+  local reference = file:sub(#prefix + 1) .. ":" .. first
+  if first ~= last then
+    reference = reference .. "-" .. last
+  end
+
+  local register = vim.fn.has("clipboard") == 1 and "+" or '"'
+  vim.fn.setreg(register, reference, "v")
+  vim.notify("Referencia copiada: " .. reference)
+end
+
+map({ "n", "x" }, "<leader>yf", copy_git_reference, { desc = "Copiar ruta Git y líneas" })
 
 -- --- KEYMAPS DE MOVIMIENTO EXTRA (no chocan con nativos) ---------------------
 
