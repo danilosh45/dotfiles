@@ -109,6 +109,9 @@ En WSL, usa el `PATH` de tu distribución Linux.
 
 ## Git desde Neovim
 
+Consulta la [guía de Git con Lazygit](WORKFLOW-GIT.md) para ver los atajos,
+el staging por bloques y el recorrido completo hasta el PR.
+
 Instala `lazygit` y `gh` y asegúrate de que estén en el `PATH`.
 En un repositorio personal puedes configurar la autoría local con
 `git config --local user.name USUARIO` y `git config --local user.email CORREO`.
